@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Airbnb | Vacation rentals, cabins, beach houses, & more</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path("airbnb-favicon.ico") %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <header class="fixed w-full bg-white z-10 shadow-sm" data-controller="header">
+      <%# render "components/navbar/header" %>
+      <%= render "components/navbar/navbar" %>
+    </header>
+    <div className="pb-20 pt-28">
+      <%= yield %>
+    </div>
+  </body>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
