@@ -1,12 +1,12 @@
-<div class="fixed w-full bg-white z-10 shadow-sm" data-controller="header">
+<div class="fixed w-full bg-white z-10 shadow-sm" >
   <div class=" py-4 border-b-[1px] ">
     <div class="max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
       <div
         class="flex flex-row  items-center  justify-between gap-3 md:gap-0"
       >
         <div><%= link_to image_tag("logo.png", alt: "Logo", height: 100, width: 100, class: "hidden md:block cursor-pointer",), root_path %> </div>
-        <%= render 'components/navbar/search' %>
-        <%= render 'components/navbar/user_menu' %>
+        <%= render 'header/search' %>
+        <%= render 'header/user_menu' %>
       </div>
     </div>
   </div>
