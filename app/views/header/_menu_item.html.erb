@@ -12,27 +12,27 @@
     data-transition-leave-start="transform opacity-100 scale-100"
     data-transition-leave-end="transform opacity-0 scale-95"
   >
-  <%# if user_signed_in? %>
+  <% if user_signed_in? %>
+    <div class="py-1" role="none">
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">My trips</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My favorites</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My reservations</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My properties</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Airbnb your home</a>
+    </div>
+  <% else %>
+    <div class="py-1" role="none">
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Host your home</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Host an experience</a>
+      <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Help</a>
+    </div>
+  <% end %>
   <div class="py-1" role="none">
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">My trips</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My favorites</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My reservations</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">My properties</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Airbnb your home</a>
-  </div>
-  <%# else %>
-  <div class="py-1" role="none">
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Host your home</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Host an experience</a>
-    <a href="#" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Help</a>
-  </div>
-  <%# end %>
-  <div class="py-1" role="none">
-    <%# if user_signed_in? %>
-    <%= link_to "Log out", "#", data: { "turbo-method": :delete }, class: "block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" %>
-    <%# else %>
-    <a href="#" data-header-target="userSignUpLink" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Sign Up</a>
-    <a href="#" data-header-target="userLoginLink" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Log in</a>
-    <%# end %>
+    <% if user_signed_in? %>
+      <%= link_to "Log out", "#", data: { "turbo-method": :delete }, class: "block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" %>
+    <% else %>
+      <a href="#" data-header-target="userSignUpLink" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-0">Sign Up</a>
+      <a href="#" data-header-target="userLoginLink" class="block py-3 px-4 text-sm text-gray-700 transition hover:bg-gray-100" role="menuitem" tabindex="-1" id="user-menu-item-1">Log in</a>
+    <% end %>
   </div>
 </div>

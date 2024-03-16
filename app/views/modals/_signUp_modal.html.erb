@@ -40,127 +40,59 @@
       <div class="font-light py-1 text-neutral-500 mt-2">
         Create an account!
       </div>
+      <%= form_for(:user, :url => registration_path(:user)) do |f| %>
       <div class="w-full relative" data-users-by-name-auth-target="nameWrapper">
-        <input
-          data-users-by-name-auth-target="name"
-          name="name"
-          type="text"
-          id="name"
-          class="name w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md outline-none focus:border-black focus:ring-0 transition disabled:opacity-70 disabled:cursor-not-allowed"
-        />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class:
+        "name w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md
+        outline-none focus:border-black focus:ring-0 transition
+        disabled:opacity-70 disabled:cursor-not-allowed" %>
         <label
           for="name"
           class="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400"
         >
           Name
         </label>
-
-        <div
-          data-users-by-name-auth-target="invalidSvg"
-          class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-        >
-          <!-- Heroicon name: solid/exclamation-circle -->
-          <svg
-            class="h-5 w-5 text-red-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
       </div>
-      <div
-        class="w-full relative my-2"
-        data-users-signUp-target="emailWrapper"
-      >
-        <input
-          data-users-signUp-target="email"
-          name="email"
-          type="email"
-          id="email"
-          class="peer w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md outline-none focus:border-black focus:ring-0 transition disabled:opacity-70 disabled:cursor-not-allowed"
-        />
+
+      <div class="w-full relative my-2" data-users-signUp-target="emailWrapper">
+        <%= f.email_field :email, autocomplete: "email", class: "peer w-full p-4
+        pt-6 font-light pl-4 bg-white border-2 rounded-md outline-none
+        focus:border-black focus:ring-0 transition disabled:opacity-70
+        disabled:cursor-not-allowed" %>
         <label
           for="email"
           class="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400"
         >
           Email
         </label>
-
-        <div
-          data-users-signUp-target="invalidSvg"
-          class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-        >
-          <!-- Heroicon name: solid/exclamation-circle -->
-          <svg
-            class="h-5 w-5 text-red-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
       </div>
+
       <div
         class="w-full relative"
         data-users-by-password-auth-target="passwordWrapper"
       >
-        <input
-          data-users-by-password-auth-target="password"
-          type="password"
-          name="password"
-          id="password"
-          class="peer w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md outline-none focus:border-black focus:ring-0 transition disabled:opacity-70 disabled:cursor-not-allowed"
-        />
+        <%= f.password_field :password, autocomplete: "new-password", class:
+        "peer w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md
+        outline-none focus:border-black focus:ring-0 transition
+        disabled:opacity-70 disabled:cursor-not-allowed" %>
         <label
           for="password"
           class="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400"
         >
           Password
         </label>
-
-        <div
-          data-users-by-password-auth-target="invalidSvg"
-          class="hidden absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
-        >
-          <!-- Heroicon name: solid/exclamation-circle -->
-          <svg
-            class="h-5 w-5 text-red-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
       </div>
+
+      <div class="my-4 sm:my-6">
+        <%= f.submit "Continue", class: "relative flex justify-center
+        items-center disabled:opacity-70 disabled:cursor-not-allowed rounded-lg
+        hover:opacity-80 transition w-full bg-rose-500 border-rose-500
+        text-white text-md py-3 font-semibold border-2"%>
+      </div>
+      <% end %>
     </div>
   </div>
 
-  <div class="my-4 sm:my-6">
-    <button
-      class="relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full bg-rose-500 border-rose-500 text-white text-md py-3 ont-semibold border-2"
-    >
-      Continue
-    </button>
-  </div>
   <div class="relative">
     <div class="absolute inset-0 flex items-center" aria-hidden="true">
       <div class="w-full border-t border-gray-300"></div>
@@ -208,7 +140,9 @@
   <div class="text-neutral-500 text-center mt-4 font-light">
     <p>
       Already have an account?
-      <span class="text-neutral-800 cursor-pointer hover:underline" data-users-signUp-target="openLoginModal"
+      <span
+        class="text-neutral-800 cursor-pointer hover:underline"
+        data-users-signUp-target="openLoginModal"
         >Log in</span
       >
     </p>

@@ -49,5 +49,6 @@
   <!-- Your header content here -->
   <%= render 'header/menu_item' %>
 </div>
-<%= render "shared/modal", modal_trigger_id: "user-SignUpAuth-modal-trigger", modal_content: "modals/signUp_modal", content_params: nil %>
+<%# render "shared/modal", modal_trigger_id: "user-SignUpAuth-modal-trigger", modal_content: "modals/signUp_modal", content_params: nil %>
+<%= render "shared/modal", modal_trigger_id: "user-SignUpAuth-modal-trigger", modal_content: "modals/signUp_modal", content_params: { resource: resource } %>
 <%= render "shared/modal", modal_trigger_id: "user-loginAuth-modal-trigger", modal_content: "modals/login_modal", content_params: nil %>
