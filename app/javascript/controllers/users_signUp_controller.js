@@ -4,47 +4,119 @@ import { leave } from "el-transition";
 
 export default class extends Controller {
   static targets = [
-    "email",
-    "emailWrapper",
-    "invalidSvg",
-    "errorMessage",
-    "submit",
-    "openLoginModal",
+    "name", "nameWrapper", "invalidSvgName", "nameLabel", "nameErrorMessage",
+    "email", "emailWrapper", "invalidSvgEmail", "emailLabel", "emailErrorMessage",
+    "password", "passwordWrapper", "invalidSvgPassword", "passwordLabel", "passwordErrorMessage",
+    "submit", "openLoginModal"
   ];
 
   connect() {
     this.openLoginModalTarget.addEventListener("click", this.openLoginModal);
+    this.submitTarget.addEventListener("click", this.handleSubmit.bind(this));
+  }
 
-    this.submitTarget.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      if (this.emailTarget.value.length === 0) {
-        // email field is empty, so don't do anything
-        this.emailWrapperTarget.classList.add("invalid-inset-input-text-field");
-        this.emailWrapperTarget.classList.remove("focus-within:ring-1");
-        this.emailWrapperTarget.classList.remove("focus-within:ring-black");
-        this.emailWrapperTarget.classList.remove("focus-within:border-black");
-        this.invalidSvgTarget.classList.remove("hidden");
-        this.errorMessageTarget.classList.remove("hidden");
+  handleSubmit(event) {
+    event.preventDefault();
+    const fields = [
+      { target: this.nameTarget, label: this.nameLabelTarget, errorMessage: this.nameErrorMessageTarget, invalidSvg: this.invalidSvgNameTarget },
+      { target: this.emailTarget, label: this.emailLabelTarget, errorMessage: this.emailErrorMessageTarget, invalidSvg: this.invalidSvgEmailTarget },
+      { target: this.passwordTarget, label: this.passwordLabelTarget, errorMessage: this.passwordErrorMessageTarget, invalidSvg: this.invalidSvgPasswordTarget }
+    ];
+  
+    // Email validation
+    const emailField = this.emailTarget.value.trim();
+    if (emailField !== "" && !this.validateEmail(emailField)) {
+      const emailFieldObject = {
+        target: this.emailTarget,
+        label: this.emailLabelTarget,
+        errorMessage: this.emailErrorMessageTarget,
+        invalidSvg: this.invalidSvgEmailTarget
+      };
+      this.showEmailError(emailFieldObject);
+    } else {
+      this.hideEmailError(this.emailErrorMessageTarget, this.invalidSvgEmailTarget);
+    }
+  
+    // Password validation
+    const passwordField = this.passwordTarget.value.trim();
+    if (passwordField !== "" && passwordField.length < 6) {
+      const passwordFieldObject = {
+        target: this.passwordTarget,
+        label: this.passwordLabelTarget,
+        errorMessage: this.passwordErrorMessageTarget,
+        invalidSvg: this.invalidSvgPasswordTarget
+      };
+      this.showPasswordError(passwordFieldObject);
+    } else {
+      this.hidePasswordError(this.passwordErrorMessageTarget, this.invalidSvgPasswordTarget);
+    }
+    // General validation loop
+    fields.forEach(field => {
+      if (field.target.name == "email" && this.emailErrorMessageTarget.textContent !== "") {
+        return
+      }
+      if (field.target.name == "password" && this.passwordErrorMessageTarget.textContent !== "") {
+        return
+      }
+      if (field.target.value.trim() === "") {
+        this.showFieldError(field);
       } else {
-        // email field is filled out, so do something
-        axios
-          .get("/api/users_by_email", {
-            params: {
-              email: this.emailTarget.value,
-            },
-            headers: {
-              ACCEPT: "application/json",
-            },
-          })
-          .then((response) => {
-            Turbo.visit("/users/sign_in");
-          })
-          .catch((response) => {
-            Turbo.visit("/users/sign_up");
-          });
+        this.hideFieldError(field);
       }
     });
+  }
+  
+
+  validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  showEmailError({ target, label, errorMessage, invalidSvg }) {
+    target.classList.add("border-red-500", "text-red-500", "focus:border-red-500");
+    label.classList.add("text-red-500");
+    errorMessage.textContent = "Invalid email format";
+    target.classList.remove("focus:border-black");
+    label.classList.remove("text-zinc-400");
+    invalidSvg.classList.remove("hidden");
+  }
+
+  hideEmailError(errorMessage, invalidSvg) {
+    errorMessage.textContent = "";
+    invalidSvg.classList.add("hidden");
+  }
+
+  showPasswordError({ target, label, errorMessage, invalidSvg }) {
+    target.classList.add("border-red-500", "text-red-500", "focus:border-red-500");
+    label.classList.add("text-red-500");
+    errorMessage.textContent = "Password must be at least 6 characters long";
+    target.classList.remove("focus:border-black");
+    label.classList.remove("text-zinc-400");
+    invalidSvg.classList.remove("hidden");
+    console.log("target, label, errorMessage, invalidSvg", target, label, errorMessage, invalidSvg);
+  }
+
+  hidePasswordError(errorMessage, invalidSvg) {
+    errorMessage.textContent = "";
+    invalidSvg.classList.add("hidden");
+  }
+
+  showFieldError({ target, label, errorMessage, invalidSvg }) {
+    target.classList.add("border-red-500", "text-red-500", "focus:border-red-500");
+    label.classList.add("text-red-500");
+    errorMessage.textContent = `${label.textContent.trim()} field is required`;
+    target.classList.remove("focus:border-black");
+    label.classList.remove("text-zinc-400");
+    invalidSvg.classList.remove("hidden");
+  }
+
+  hideFieldError({ target, label, errorMessage, invalidSvg }) {
+    target.classList.remove("border-red-500", "text-red-500", "focus:border-red-500");
+    label.classList.remove("text-red-500");
+    target.classList.add("focus:border-black");
+    label.classList.add("text-zinc-400");
+    errorMessage.textContent = "";
+    invalidSvg.classList.add("hidden");
   }
 
   openLoginModal() {
@@ -55,6 +127,7 @@ export default class extends Controller {
   }
 
   submitForm() {
-    console.log("aasdofijsiodjf");
+    console.log("Submitting form...");
+ 
   }
 }

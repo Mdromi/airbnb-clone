@@ -11,11 +11,12 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <header class="fixed w-full bg-white z-10 shadow-sm" data-controller="header">
+    <header class=" w-full bg-white z-10 shadow-sm nav-header" data-controller="header">
       <%# render "components/navbar/header" %>
       <%= render "header/navbar" %>
     </header>
-    <div className="pb-20 pt-28 mt-10">
+    <div class="pb-20 pt-28 mt-10 mt-[header-height] px-10">
+      <%= render partial: "shared/notifications", locals: { notice_message: flash[:notice], alert_message: flash[:alert] } %>
       <%= yield %>
     </div>
   </body>

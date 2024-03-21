@@ -1,0 +1,19 @@
+<div class="w-full relative my-2">
+  <input
+    data-users-signUp-target="<%= inputName %>"
+    name="<%= inputName %>"
+    type="<%= inputType %>"
+    id="<%= inputId %>"
+    autocomplete
+    class="peer w-full p-4 pt-6 font-light pl-4 bg-white border-2 rounded-md outline-none focus:border-black focus:ring-0 transition disabled:opacity-70 disabled:cursor-not-allowed"
+  />
+  <label
+    data-users-signUp-target="<%= labelTarget %>"
+    for="<%= inputId %>"
+    class="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400"
+  >
+    <%= labelText %>
+  </label>
+  <p data-users-signUp-target="<%= errorMessageTarget %>" class="mt-2 text-sm text-red-600 dark:text-red-500"></p>
+  <%= render partial: 'shared/invalid_svg_partial', locals: { target: invalidSvg } %>
+</div>
